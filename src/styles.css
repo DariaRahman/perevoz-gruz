@@ -115,7 +115,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .header-cta:hover { background: var(--orange-deep); }
 
 .menu-button,
-.mobile-menu { display: none; }
+.mobile-menu,
+.mobile-menu-backdrop { display: none; }
 
 .hero {
   display: grid;
@@ -846,15 +847,35 @@ button, a { -webkit-tap-highlight-color: transparent; }
     cursor: pointer;
   }
 
+  .mobile-menu-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    background: rgba(27, 22, 18, 0.42);
+    cursor: pointer;
+  }
+
   .mobile-menu {
     display: none;
     position: fixed;
-    inset: 76px 0 0;
-    z-index: 29;
+    top: 76px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
     flex-direction: column;
     gap: 18px;
     padding: 28px 5vw;
     background: var(--surface);
+    border-top: 1px solid var(--line);
+    overflow-y: auto;
+  }
+
+  .mobile-menu a {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
   }
 
   .mobile-menu.is-open { display: flex; }

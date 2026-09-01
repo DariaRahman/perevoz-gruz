@@ -23,42 +23,53 @@ export default function Header() {
   }, [menuOpen])
 
   return (
-    <header className="header">
-      <BrandLogo />
+    <>
+      <header className="header">
+        <BrandLogo />
 
-      <nav className="desktop-nav" aria-label="Основная навигация">
-        {links.map((link) => (
-          <a href={link.href} key={link.href}>{link.label}</a>
-        ))}
-      </nav>
+        <nav className="desktop-nav" aria-label="Основная навигация">
+          {links.map((link) => (
+            <a href={link.href} key={link.href}>{link.label}</a>
+          ))}
+        </nav>
 
-      <div className="header-actions">
-        {instagram && (
-          <a
-            className="header-social"
-            href={instagram.href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram PEREVOZ_GRUZ"
-          >
-            <Instagram size={20} />
-          </a>
-        )}
-        <button className="header-cta" type="button" onClick={() => openLeadModal({ channel: 'button' })}>
-          Рассчитать стоимость
+        <div className="header-actions">
+          {instagram && (
+            <a
+              className="header-social"
+              href={instagram.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram PEREVOZ_GRUZ"
+            >
+              <Instagram size={20} />
+            </a>
+          )}
+          <button className="header-cta" type="button" onClick={() => openLeadModal({ channel: 'button' })}>
+            Рассчитать стоимость
+          </button>
+        </div>
+
+        <button
+          className="menu-button"
+          type="button"
+          aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen((value) => !value)}
+        >
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-      </div>
+      </header>
 
-      <button
-        className="menu-button"
-        type="button"
-        aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
-        aria-expanded={menuOpen}
-        aria-controls="mobile-navigation"
-        onClick={() => setMenuOpen((value) => !value)}
-      >
-        {menuOpen ? <X size={22} /> : <Menu size={22} />}
-      </button>
+      {menuOpen && (
+        <button
+          type="button"
+          className="mobile-menu-backdrop"
+          aria-label="Закрыть меню"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
 
       <nav
         className={`mobile-menu ${menuOpen ? 'is-open' : ''}`}
@@ -80,6 +91,6 @@ export default function Header() {
           Рассчитать стоимость
         </button>
       </nav>
-    </header>
+    </>
   )
 }
